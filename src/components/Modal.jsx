@@ -9,7 +9,7 @@ export default function Modal({ title, children, onClose }) {
     if(!name){
       return null;
     }
-    return <motion.img 
+    return <motion.img id='icon-modal'
     src={require(`../assets/${name}.png`)} 
     initial={{ opacity: 1 }}
     whileHover={{ scale: 1.2, rotate: 360 }}  // Scale and rotate on hover
@@ -30,7 +30,8 @@ export default function Modal({ title, children, onClose }) {
       initial = "hidden"
       animate = "visible"
       exit="hidden"
-      open className="modal">
+      open className="modal"
+      style={title === 'Sign Up' ? { top: '10%' } : {}}>
         {getIcon(title)}
         <h2>{title}</h2>
         {children}

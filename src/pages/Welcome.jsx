@@ -5,6 +5,7 @@ import Joyride from 'react-joyride';
 import { useEffect, useState } from 'react';
 import HeaderSection from '../components/HeaderSection';
 import ScrollIcon from '../components/ScrollIcon';
+import { Outlet } from 'react-router-dom';
 
 export default function WelcomePage() {
  
@@ -106,6 +107,7 @@ export default function WelcomePage() {
           {/* You can add more testimonials or even a carousel for multiple testimonials */}
         </section>
       </main>
+      <Outlet/>
       {startTour && (
         <Joyride
           steps={tourSteps}

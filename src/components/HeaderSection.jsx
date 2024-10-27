@@ -58,14 +58,14 @@ export default function HeaderSection({isModalOpen,setModalOpen,onClick}){
             <motion.button
             whileHover={{scale:1.1}}
             transition={{type:'spring',stiffness:500}}>
-              <Link className="cta-link" to="/challenges">
+              <Link className="cta-link" to="login">
             Login
           </Link>
           </motion.button>
           <motion.button
             whileHover={{scale:1.1}}
             transition={{type:'spring',stiffness:500}}>
-              <Link className="cta-link" to="/challenges">
+              <Link className="cta-link" to="signup">
             Signup
           </Link>
           </motion.button>

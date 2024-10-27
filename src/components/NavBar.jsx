@@ -1,6 +1,6 @@
 //import { useMotionValue, useScroll } from "framer-motion";
 import {  useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function NavBar(){
     const [isFixed,setIsFixed]=useState(false);
@@ -48,8 +48,8 @@ export default function NavBar(){
         </div>
         {/* Right side: Menu items (conditionally shown on mobile) */}
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
-        <li>Logo</li>
-        <li>Logo</li>
+        <li><NavLink to='login'>Log In</NavLink></li>
+        <li><NavLink to='signup'>Sign Up</NavLink></li>
         <li>Logo</li>
         <li>Logo</li> 
         </ul>
