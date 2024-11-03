@@ -6,15 +6,22 @@ import { useEffect, useState } from 'react';
 import HeaderSection from '../components/HeaderSection';
 import ScrollIcon from '../components/ScrollIcon';
 import { Outlet } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
+import {getRecipes} from '../../src/firebase'
 
 export default function WelcomePage() {
  
-
+  const [recipeData,setRecipeData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(true);
   const [startTour, setStartTour] = useState(false);
   const [showIcon,setShowIcon] = useState(true);
 
   useEffect(() => {
+    const fetchRecipes = async () => {
+      const response = await getRecipes();
+      setRecipeData(response);
+    }
+    fetchRecipes();
     // Scroll to the top of the page when the component mounts (on page load)
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -64,15 +71,13 @@ export default function WelcomePage() {
     
       <HeaderSection isModalOpen={isModalOpen} setModalOpen={setModalOpen} onClick={startWebsiteTour}/>
       {showIcon && <ScrollIcon/>}
+
       <main id="welcome-content">
-        <section>
-          <h2>There&apos;s never been a better time.</h2>
-          <p>
-            With our platform, you can set, track, and conquer challenges at
-            your own pace. Whether it&apos;s personal growth, professional
-            achievements, or just for fun, we&apos;ve got you covered.
-          </p>
-        </section>
+        <SearchBar dataset={recipeData}/>
+        <div className='welcome-statement'>
+          <h1>Hiya, Let&apos;s Explore!</h1>
+          
+        </div>
 
         <section>
           <h2>Why Challenge Yourself?</h2>
@@ -108,6 +113,9 @@ export default function WelcomePage() {
         </section>
       </main>
       <Outlet/>
+      <footer>
+        <p>&copy; 2023 KuchBhi</p>
+      </footer>
       {startTour && (
         <Joyride
           steps={tourSteps}

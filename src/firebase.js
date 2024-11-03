@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { get, getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCIKzd4pGhReQo4E_nrKxx-wHHigqdLkug",
@@ -45,6 +45,25 @@ export function writeUserData(userId, email, username) {
     console.error("Error storing user data:", error);
     throw error;
   });
+}
+
+export async function getRecipes(){
+  const recipes=ref(database, 'recipes/');
+  try{
+    const snapshot = await get(recipes);
+    if(snapshot.exists()){
+      const data = snapshot.val();
+      console.log(data);
+      return data;
+    }
+    else{
+      console.log("null");
+      return null;
+    }
+  }catch(error){
+    console.error("Error fetching recipes data:", error);
+    throw error
+  }
 }
 
 // Export Auth functions
