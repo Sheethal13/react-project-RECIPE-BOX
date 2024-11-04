@@ -226,7 +226,6 @@ main {
   max-width: 90%;
   display: flex;
   gap: 1rem;
-  flex-direction: column;
   list-style: none;
   margin: 2rem 0 0 0;
   padding: 0;
@@ -701,15 +700,18 @@ Form .form-inputs {
 
 /*searchbar*/
 .search-div{
+  margin: 0 auto;
   margin-top: 3rem;
   display: flex;
+  align-items: center; /* Vertically centers input and button */
+  width: 80%; /* Ensures the search bar is centered and aligns with other sections */
+  max-width: 600px; /* Optional: limits the maximum width */
 }
 .search-input{
-  width: 85%;
-  height: fit-content;
-  margin: 5px;
+
+  width: calc(100% - 50px); /* Leaves room for the button */
   padding: 12px;
-  margin-top: 8px;
+  margin: 5px;
   border: 1px solid #ccc;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -717,14 +719,111 @@ Form .form-inputs {
   color: #333;
 }
 .search-button{
+  width: 40px; /* Fixed width for consistent button size */
+  height: 40px; /* Ensures button height matches input padding */
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 5%;
   margin: 5px;
-  margin-top: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center; /* Centers the image inside the button */
+  justify-content: center;
 }
 .search-button img{
   width:100%;
+  height: auto;
+}
+
+/*card*/
+.recipes-card{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* space between cards */
+  width: 100%;
+  list-style: none;
+  justify-content: space-between;
+}
+.card{
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: calc(33.333% - 20px); /* 3 cards per row with gap */
+  max-width: 31%;
+  height: 450px; /* Fixed height to ensure equal card height */
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+.card-image img {
+  width: 100%;
+  height: 250px; /* Fixed image height */
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 16px;
+  overflow: hidden;
+  flex-grow: 1; /* Ensures the body takes remaining space */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncates long titles with ellipsis */
+}
+
+.card-text {
+  overflow: hidden;
+  max-height: 120px; /* Limit height for text content */
+}
+
+.card-text ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  color: #666;
+}
+
+.card-text li {
+  margin-bottom: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+      width: calc(50% - 20px);
+      max-width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+      width: 100%;
+  }
+}
+
+.card-container-buttons{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+.card-container-buttons button{
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  background-color: #518564;
+  color: white;
+  border-radius: 0.5rem;
 }

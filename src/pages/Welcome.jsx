@@ -1,27 +1,22 @@
 
-// import { motion, spring, useScroll, useTransform } from 'framer-motion';
+// import { motion } from 'framer-motion';
 // import Modal from '../components/Modal';
 import Joyride from 'react-joyride';
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import HeaderSection from '../components/HeaderSection';
 import ScrollIcon from '../components/ScrollIcon';
 import { Outlet } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
-import {getRecipes} from '../../src/firebase'
+import CardContainer from '../components/CardContainer';
+import DataContextProvider from '../store/DataContext';
 
 export default function WelcomePage() {
- 
-  const [recipeData,setRecipeData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(true);
   const [startTour, setStartTour] = useState(false);
   const [showIcon,setShowIcon] = useState(true);
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      const response = await getRecipes();
-      setRecipeData(response);
-    }
-    fetchRecipes();
+    
     // Scroll to the top of the page when the component mounts (on page load)
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -68,17 +63,17 @@ export default function WelcomePage() {
   };
   return (
     <>
-    
+    <DataContextProvider>
       <HeaderSection isModalOpen={isModalOpen} setModalOpen={setModalOpen} onClick={startWebsiteTour}/>
       {showIcon && <ScrollIcon/>}
 
       <main id="welcome-content">
-        <SearchBar dataset={recipeData}/>
+        <SearchBar/>
         <div className='welcome-statement'>
           <h1>Hiya, Let&apos;s Explore!</h1>
           
         </div>
-
+        <CardContainer/>
         <section>
           <h2>Why Challenge Yourself?</h2>
           <p>
@@ -102,15 +97,6 @@ export default function WelcomePage() {
           </ul>
         </section>
 
-        <section>
-          <h2>Join Thousands Embracing The Challenge</h2>
-          <p>
-            “I never realized what I was capable of until I set my first
-            challenge here. It&apos;s been a transformative experience!” - Alex
-            P.
-          </p>
-          {/* You can add more testimonials or even a carousel for multiple testimonials */}
-        </section>
       </main>
       <Outlet/>
       <footer>
@@ -131,6 +117,7 @@ export default function WelcomePage() {
           }}
         />
       )}
+    </DataContextProvider>
     </>
   );
 }

@@ -1,17 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import search from '../assets/go.png'
+import { DataContext } from "../store/DataContext";
 
-export default function SearchBar({dataset}){
+export default function SearchBar(){
     const [searchValue,setSearchValue]=useState('');
-
+    const {dataset,filterData}=useContext(DataContext);
     
-    function handleSearch(result){
-        const filteredResult = result.filter((menu) =>  
+    function handleSearch(){
+        const filteredResult = dataset.filter((menu) =>  
             menu.ingredients.some((item) =>
                 item.name.toLowerCase().includes(searchValue.toLowerCase())
             )
         )
-        console.log(result,filteredResult);
+        filterData(filteredResult);
+        console.log(dataset,filteredResult);
     }
     return (
         <>
@@ -23,7 +25,7 @@ export default function SearchBar({dataset}){
         onChange={(e) => setSearchValue(e.target.value)}></input>
         <button 
         className="search-button"
-        onClick={() => handleSearch(dataset)}>
+        onClick={() => handleSearch()}>
         <img src={search} alt="go" />
         </button>
         </div>
