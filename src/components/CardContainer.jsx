@@ -33,7 +33,7 @@ export default function CardContainer(){
             {recipeData.map((recipe) => (
               <Card
                 key={recipe.id}
-                imgSrc={img}
+                imgSrc={recipe.imgSrc || img}
                 title={recipe.itemName}
                 ingredients={recipe.ingredients}
               />

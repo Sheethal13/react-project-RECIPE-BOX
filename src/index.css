@@ -751,7 +751,7 @@ Form .form-inputs {
   overflow: hidden;
   width: calc(33.333% - 20px); /* 3 cards per row with gap */
   max-width: 31%;
-  height: 450px; /* Fixed height to ensure equal card height */
+  height: 500px; /* Fixed height to ensure equal card height */
   display: flex;
   margin-bottom: 20px;
   flex-direction: column;
@@ -773,6 +773,26 @@ Form .form-inputs {
   overflow: hidden;
   flex-grow: 1; /* Ensures the body takes remaining space */
 }
+
+.card-body .card-actions{
+  border-top: 2px solid black;
+  max-height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-body .card-actions img{
+  padding: 10px;
+  width: 45px;
+  
+}
+
+.card-body .card-actions .card-actions-left{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 
 .card-title {
   font-size: 1.25rem;
@@ -800,16 +820,17 @@ Form .form-inputs {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width:601px)  {
   .card {
       width: calc(50% - 20px);
       max-width: 50%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .card {
       width: 100%;
+      max-width: 100%;
   }
 }
 
