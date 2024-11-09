@@ -8,7 +8,6 @@ import ScrollIcon from '../components/ScrollIcon';
 import { Outlet } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CardContainer from '../components/CardContainer';
-import DataContextProvider from '../store/DataContext';
 
 export default function WelcomePage() {
   const [isModalOpen, setModalOpen] = useState(true);
@@ -63,7 +62,6 @@ export default function WelcomePage() {
   };
   return (
     <>
-    <DataContextProvider>
       <HeaderSection isModalOpen={isModalOpen} setModalOpen={setModalOpen} onClick={startWebsiteTour}/>
       {showIcon && <ScrollIcon/>}
 
@@ -117,7 +115,6 @@ export default function WelcomePage() {
           }}
         />
       )}
-    </DataContextProvider>
     </>
   );
 }

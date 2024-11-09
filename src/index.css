@@ -848,3 +848,92 @@ Form .form-inputs {
   color: white;
   border-radius: 0.5rem;
 }
+
+
+/*recipe-detail-page*/
+.header-recipe{
+  background: rgb(241, 231, 208);
+  padding: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-recipe img{
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid #F3EDE0;
+}
+.header-recipe h1{
+  font-size: 3.5rem;
+  font-weight: bolder;
+  color: #5A9B7B;
+}
+.body-recipe{
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: larger;
+}
+.ingredients-recipe{
+  padding: 0 5%;
+  background-color: rgb(47 75 106 / 68%);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgb(151 148 148 / 50%);
+}
+.ingredients-recipe h2, .recipe-recipe h2{
+  font-size: 2rem;
+  color: whitesmoke;
+}
+.ingredients-recipe ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 15px;
+}
+.ingredients-recipe ul li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 8px;
+}
+.ingredients-recipe label {
+  display: flex;
+  align-items: center;
+}
+.ingredients-recipe input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  background-color: #e0e0e0;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+.recipe-recipe{
+  padding: 5%;
+}
+.recipe-recipe li{
+  margin: 10px 0;
+}
+
+@media (max-width: 1110px) and (min-width:768px)  {
+  .header-recipe{
+    padding: 5%;
+    padding-top: 15%;
+  }
+  .header-recipe img{
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px)   {
+  .header-recipe{
+    padding: 5%;
+    padding-top: 25%;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-recipe img{
+    width: 90%;
+  }
+}

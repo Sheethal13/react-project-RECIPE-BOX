@@ -36,6 +36,7 @@ export default function CardContainer(){
                 imgSrc={recipe.imgSrc || img}
                 title={recipe.itemName}
                 ingredients={recipe.ingredients}
+                id={recipe.id}
               />
             ))}
             </AnimatePresence>

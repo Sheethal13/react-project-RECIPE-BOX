@@ -4,7 +4,7 @@ import view from '../assets/icons8-view-48.png'
 import send from '../assets/icons8-send-26.png'
 import { Link } from 'react-router-dom'
 
-export default function Card({imgSrc,title,ingredients}){
+export default function Card({imgSrc,title,ingredients,id}){
     return (
         <div className="card">
             <div className="card-image">
@@ -27,7 +27,7 @@ export default function Card({imgSrc,title,ingredients}){
                         <img src={comment} alt='comment'/>
                         <img src={send} alt='share' style={{'width':'40px'}}/>
                     </div>
-                        <Link><img src={view} alt='view'/></Link>
+                        <Link to={`/recipes/${id}`}><img src={view} alt='view'/></Link>
                 </div>
             </div>
         </div>
