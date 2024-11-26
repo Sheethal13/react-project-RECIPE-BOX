@@ -8,6 +8,7 @@ import ScrollIcon from '../components/ScrollIcon';
 import { Outlet } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CardContainer from '../components/CardContainer';
+import Footer from '../components/Footer';
 
 export default function WelcomePage() {
   const [isModalOpen, setModalOpen] = useState(true);
@@ -97,9 +98,7 @@ export default function WelcomePage() {
 
       </main>
       <Outlet/>
-      <footer>
-        <p>&copy; 2023 KuchBhi</p>
-      </footer>
+      <Footer/>
       {startTour && (
         <Joyride
           steps={tourSteps}

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { DataContext } from "../store/DataContext";
+import Footer from "../components/Footer";
 
 export default function RecipeDetail(){
     
@@ -37,10 +38,11 @@ export default function RecipeDetail(){
         </div>
         {/* Right side: Menu items (conditionally shown on mobile) */}
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
+        <li>Origin</li>
+        <li>Contact</li>
         <li><NavLink to='login'>Log In</NavLink></li>
         <li><NavLink to='signup'>Sign Up</NavLink></li>
         <li>Logo</li>
-        <li>Logo</li> 
         </ul>
         </nav>
 
@@ -74,6 +76,7 @@ export default function RecipeDetail(){
                 <p>To view detailed recipe, click here : <span><Link to={recipe.source}>go to source</Link></span></p>
             </div>
         </div>
+        <Footer/>
         </div>
     )
 }

@@ -18,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
+
 // Function to write login data
 export function writeLoginData(userId, email) {
   set(ref(database, 'userLogin/' + userId), {
