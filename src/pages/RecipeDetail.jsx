@@ -2,15 +2,22 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { DataContext } from "../store/DataContext";
 import Footer from "../components/Footer";
+import profile from '../assets/profile.png';
+import ProfileSection from "../components/ProfileSection";
 
 export default function RecipeDetail(){
     
     const id = useParams().id;
     const {dataset} = useContext(DataContext);
     const [isOpen, setIsOpen] = useState(false);
+    const [isSectionOpen,setIsSectionOpen] = useState(false);
+
     const toggleMenu = () => {
         setIsOpen(!isOpen);
       };
+    function toggleSection(){
+        setIsSectionOpen(!isSectionOpen);
+    }
     const recipe= dataset.find(r=> r.id===id);
     if(!recipe){
         return(
@@ -30,20 +37,26 @@ export default function RecipeDetail(){
                 RECIPE BOX - {recipe.itemName}
             </h1>
         </div>
-        {/* Hamburger icon for mobile */}
+        {isSectionOpen && 
+        <ProfileSection toggleSection={toggleSection}/>
+        }
+        {!isSectionOpen &&(
+            <>
         <div className="navbar-hamburger" onClick={toggleMenu}>
             <span className="hamburger-icon"></span>
             <span className="hamburger-icon"></span>
             <span className="hamburger-icon"></span>
         </div>
-        {/* Right side: Menu items (conditionally shown on mobile) */}
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
         <li>Origin</li>
         <li>Contact</li>
         <li><NavLink to='login'>Log In</NavLink></li>
         <li><NavLink to='signup'>Sign Up</NavLink></li>
-        <li>Logo</li>
+        <li>
+            <img src={profile} style={{'width':'30px'}} alt="acc" onClick={toggleSection}/>
+        </li>
         </ul>
+        </>)}
         </nav>
 
         <div className="header-recipe">

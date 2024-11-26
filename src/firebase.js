@@ -67,5 +67,52 @@ export async function getRecipes(){
   }
 }
 
+export async function fetchFav(userId){
+  const userDetails = ref(database, `users/${userId}/favorites/`);
+  try{
+    const snapshot = await get(userDetails);
+    console.log(snapshot.val())
+    return snapshot.exists() ? snapshot.val() : [];
+  }
+  catch(error){
+    console.error("Error fetching recipes data:", error);
+    throw error
+  }
+}
+
+export async function addFav(userId,recipeid){
+  const userDetails = ref(database,`users/${userId}/favorites/`);
+  try{
+      const snapshot = await get(userDetails);
+      const favorites = snapshot.exists() ? snapshot.val() : [];
+      if(!favorites.includes(recipeid)){
+        favorites.push(recipeid);
+        await set(userDetails, favorites);
+        //update(userDetails,[...favorites,recipeid]);
+      }
+      return
+    }
+    catch(error){
+      console.error("Error fetching recipes data:", error);
+      throw error
+    }
+}
+
+export async function removeFav(userId,recipeid){
+  const userDetails = ref(database,`users/${userId}/favorites/`);
+  try{
+    const snapshot = await get(userDetails);
+    const favorites = snapshot.exists() ? snapshot.val() : [];
+    const updatedFav = favorites.filter((id) => id!== recipeid);
+    await set (userDetails,updatedFav);
+    //update(userDetails,updatedFav);
+    return;
+  }
+  catch(error){
+    console.error("Error fetching recipes data:", error);
+    throw error
+  }
+}
+
 // Export Auth functions
 export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };

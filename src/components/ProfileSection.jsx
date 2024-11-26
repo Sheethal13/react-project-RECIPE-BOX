@@ -24,6 +24,8 @@ export default function ProfileSection({toggleSection}){
     return () => unsubscribe();
 
   },[]);
+  const userId = user? user.uid : null;
+
     return(<>
         <div className="profile-section">
             <div className="profile-header">
@@ -43,7 +45,7 @@ export default function ProfileSection({toggleSection}){
                 <div className='user-details'>
                     <h2>{user.email}</h2>
                 </div>
-                <h2>My Favorites</h2>
+                <Link to="my-favorites" state={{userId}}><h2>My Favorites</h2></Link>
                 <h2>My Recipes</h2>
             </div>
             }
