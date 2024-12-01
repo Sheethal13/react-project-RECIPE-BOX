@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { get, getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
@@ -54,11 +54,9 @@ export async function getRecipes(){
     const snapshot = await get(recipes);
     if(snapshot.exists()){
       const data = snapshot.val();
-      console.log(data);
       return data;
     }
     else{
-      console.log("null");
       return null;
     }
   }catch(error){
@@ -113,6 +111,38 @@ export async function removeFav(userId,recipeid){
     throw error
   }
 }
+
+export async function addRecipe(recipe){
+  const recipes=ref(database, 'recipes/');
+  try{
+    const snapshot = await get(recipes);
+    if(snapshot.exists()){
+      const recipeList = snapshot.val();
+      recipeList.push(recipe);
+      await set(recipes,recipeList);
+      alert('Your recipe has been successfully added!');
+    }
+    else{
+      return null;
+    }
+  }catch(error){
+    console.error("Error fetching recipes data:", error);
+    throw error
+  }
+}
+
+export function handleLogout(){
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      alert("You have been logged out successfully!");
+      // Optional: Redirect the user to the login page or home page
+      window.location.href = "/";
+    })
+    .catch((error) => {
+      console.error("Error logging out:", error);
+    });
+};
 
 // Export Auth functions
 export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };

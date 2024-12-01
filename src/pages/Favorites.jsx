@@ -6,7 +6,7 @@ import { DataContext } from "../store/DataContext";
 import Footer from "../components/Footer";
 import profile from '../assets/profile.png';
 import ProfileSection from "../components/ProfileSection";
-import { fetchFav } from "../firebase";
+import { fetchFav, handleLogout } from "../firebase";
 import Card from "../components/Card";
 
 
@@ -71,8 +71,9 @@ export default function Favorites(){
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
         <li>Origin</li>
         <li>Contact</li>
-        <li><NavLink to='login'>Log In</NavLink></li>
-        <li><NavLink to='signup'>Sign Up</NavLink></li>
+        {!userId && (<li><NavLink to='login'>Log In</NavLink></li>)}
+        {!userId && (<li><NavLink to='signup'>Sign Up</NavLink></li>)}
+        {userId && <li onClick={handleLogout} className="logout">Log Out</li>}
         <li>
             <img src={profile} style={{'width':'30px'}} alt="acc" onClick={toggleSection}/>
         </li>

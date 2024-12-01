@@ -63,7 +63,7 @@ export default function Challenges() {
         initial={{opacity:0, y:-20}}
         animate={{opacity:1, y:0}}
         exit={{opacity:0, y:-20}}
-        key="fallback">No challenges found.</motion.p>}
+        key="fallback">No Recipes found. Please try after some time.</motion.p>}
         </AnimatePresence>
       </ChallengeTabs>
     </div>

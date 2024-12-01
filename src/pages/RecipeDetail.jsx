@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { DataContext } from "../store/DataContext";
 import Footer from "../components/Footer";
 import profile from '../assets/profile.png';
 import ProfileSection from "../components/ProfileSection";
+import { auth , handleLogout} from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function RecipeDetail(){
     
@@ -11,7 +13,25 @@ export default function RecipeDetail(){
     const {dataset} = useContext(DataContext);
     const [isOpen, setIsOpen] = useState(false);
     const [isSectionOpen,setIsSectionOpen] = useState(false);
+    const [user,setUser] = useState(null);
 
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        if (currentUser) {
+            // User is logged in
+            setUser(currentUser);
+            console.log("User logged in:", currentUser);
+        } else {
+            // User is logged out
+            setUser(null);
+            console.log("User not logged in");
+        }
+        });
+        
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+
+    },[]);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
       };
@@ -50,8 +70,10 @@ export default function RecipeDetail(){
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
         <li>Origin</li>
         <li>Contact</li>
-        <li><NavLink to='login'>Log In</NavLink></li>
-        <li><NavLink to='signup'>Sign Up</NavLink></li>
+        {!user && (<li><NavLink to='login'>Log In</NavLink></li>)}
+        {!user && (<li><NavLink to='signup'>Sign Up</NavLink></li>)}
+        {user && <li onClick={handleLogout} className="logout">Log Out</li>}
+
         <li>
             <img src={profile} style={{'width':'30px'}} alt="acc" onClick={toggleSection}/>
         </li>

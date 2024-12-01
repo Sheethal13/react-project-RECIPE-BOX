@@ -6,6 +6,7 @@ import Signup from './pages/Signup.jsx';
 import RecipeDetail from './pages/RecipeDetail.jsx';
 import DataContextProvider from './store/DataContext.jsx';
 import Favorites from './pages/Favorites.jsx';
+import PublishRecipe from './pages/PublishRecipe.jsx';
 
 const router = createBrowserRouter([
   { 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path:'my-favorites',
     element:<Favorites/>
+  },
+  {
+    path:'publish-new',
+    element:<PublishRecipe/>
   }
 ]);
 

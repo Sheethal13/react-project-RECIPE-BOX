@@ -3,11 +3,15 @@ import {  useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom";
 import profile from '../assets/profile.png';
 import ProfileSection from "./ProfileSection";
+import { auth, handleLogout } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function NavBar(){
     const [isFixed,setIsFixed]=useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isSectionOpen,setIsSectionOpen] = useState(false);
+    const [user,setUser] = useState(null);
+
     const toggleMenu = () => {
         setIsOpen(!isOpen);
       };
@@ -15,7 +19,17 @@ export default function NavBar(){
         setIsSectionOpen(!isSectionOpen);
     }
     useEffect(()=>{
-        
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                // User is logged in
+                setUser(currentUser);
+                console.log("User logged in:", currentUser);
+            } else {
+                // User is logged out
+                setUser(null);
+                console.log("User not logged in");
+            }
+            });
         function handleScroll(){
             if(window.scrollY>800){
                 setIsFixed(true);
@@ -29,6 +43,7 @@ export default function NavBar(){
 
           return () => {
             window.removeEventListener('scroll', handleScroll);
+            unsubscribe();
           };
     },[])
 
@@ -59,8 +74,9 @@ export default function NavBar(){
         <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
         <li>Origin</li>
         <li>Contact</li>
-        <li><NavLink to='login'>Log In</NavLink></li>
-        <li><NavLink to='signup'>Sign Up</NavLink></li>
+        {!user && (<li><NavLink to='login'>Log In</NavLink></li>)}
+        {!user && (<li><NavLink to='signup'>Sign Up</NavLink></li>)}
+        {user && <li onClick={handleLogout} className="logout">Log Out</li>}
         <li>
             <img src={profile} style={{'width':'30px'}} alt="acc" onClick={toggleSection}/>
         </li>

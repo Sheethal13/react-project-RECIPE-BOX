@@ -46,7 +46,7 @@ export default function ProfileSection({toggleSection}){
                     <h2>{user.email}</h2>
                 </div>
                 <Link to="my-favorites" state={{userId}}><h2>My Favorites</h2></Link>
-                <h2>My Recipes</h2>
+                <Link to="publish-new" state={{userId}}><h2>Publish New Recipe</h2></Link>
             </div>
             }
             {(!user) && 
